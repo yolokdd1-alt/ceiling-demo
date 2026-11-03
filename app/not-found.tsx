@@ -1,0 +1,1 @@
+import {PageIntro,ButtonLink} from '@/components/ui';export default function NotFound(){return <><PageIntro eyebrow="404" title="Такой страницы нет." text="Проверьте адрес или начните с расчёта потолка."/><div className="container page-body"><ButtonLink href="/calculator">Перейти к калькулятору</ButtonLink></div></>}

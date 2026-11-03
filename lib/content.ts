@@ -1,0 +1,10 @@
+import data from '@/content/site.json';
+export type Work={id:string;title:string;room:string;type:string;color:string;area:number;image:string;alt:string;date:string};
+export type Review={id:string;name:string;district:string;type:string;text:string;date:string;image:string;rating:number};
+export type Member={name:string;role:string;image:string;experience:string};
+type Company={name:string|null;city:string|null;phone:string|null;address:string|null;email:string|null;legalName:string|null;inn:string|null;serviceArea:string[];workHours:string|null;telegram:string|null;whatsapp:string|null;mapEmbedUrl:string|null};
+type Site=Omit<typeof data,'company'|'siteUrl'|'portfolio'|'reviews'|'team'|'guarantee'|'installationHours'|'roomTemplates'> & {company:Company;siteUrl:string|null;portfolio:Work[];reviews:Review[];team:Member[];guarantee:{canvasYears:number|null;installationYears:number|null};installationHours:string|null;roomTemplates:{id:string;name:string;image:string|null;width:number;height:number;mask:number[][]}[]};
+export const site:Site=data;
+export const companyName=site.company.name||'[Название компании]';
+export const city=site.company.city||'[город]';
+export const money=(v:number)=>new Intl.NumberFormat('ru-RU',{maximumFractionDigits:0}).format(v)+' ₽';

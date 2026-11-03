@@ -1,0 +1,3 @@
+import {site,companyName} from '@/lib/content';
+export function JsonLd({value}:{value:Record<string,unknown>}){return <script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify(value).replace(/</g,'\u003c')}}/>}
+export function BusinessSchema(){return site.configured&&site.company.name&&site.company.phone&&site.company.address?<JsonLd value={{'@context':'https://schema.org','@type':'HomeAndConstructionBusiness',name:companyName,telephone:site.company.phone,address:{'@type':'PostalAddress',streetAddress:site.company.address,addressLocality:site.company.city,addressCountry:'RU'},url:site.siteUrl,areaServed:site.company.serviceArea}}/>:null;}

@@ -1,0 +1,3 @@
+"use client";
+import type {CalculationInput} from '@/lib/calculation';
+export function BookingWidget({calculation}:{calculation?:CalculationInput}){return <div className="booking-widget"><span className="eyebrow">ДЕМОНСТРАЦИЯ САЙТА</span><h3>Запись на замер</h3><p>В рабочей версии здесь можно выбрать день и время, а компания увидит запись в своей панели.</p><div className="notice">В демонстрации запись и отправка личных данных отключены. Можно посмотреть страницы, рассчитать стоимость и попробовать визуализатор.</div>{calculation&&<p className="helper">Ваш расчёт можно сохранить на устройстве кнопкой в калькуляторе.</p>}</div>}

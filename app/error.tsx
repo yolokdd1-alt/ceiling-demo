@@ -1,0 +1,1 @@
+"use client";export default function ErrorPage({reset}:{reset:()=>void}){return <div className="container section"><h1>Не удалось открыть страницу.</h1><p style={{margin:'25px 0'}}>Попробуйте загрузить её ещё раз.</p><button className="button" onClick={reset}>Повторить</button></div>}

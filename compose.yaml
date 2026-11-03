@@ -1,0 +1,53 @@
+services:
+  database:
+    image: postgres:16-bookworm
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ceiling
+      POSTGRES_USER: ceiling
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
+    volumes:
+      - bookings:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ceiling -d ceiling"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+  database-init:
+    build:
+      context: .
+      target: builder
+      args:
+        SITE_URL: ${SITE_URL}
+        NEXT_PUBLIC_METRIKA_ID: ${NEXT_PUBLIC_METRIKA_ID:-}
+    environment:
+      DATABASE_PROVIDER: postgresql
+      DATABASE_URL: postgresql://ceiling:${POSTGRES_PASSWORD}@database:5432/ceiling
+    command: ["node", "scripts/db.mjs"]
+    depends_on:
+      database:
+        condition: service_healthy
+  site:
+    build:
+      context: .
+      args:
+        SITE_URL: ${SITE_URL}
+        NEXT_PUBLIC_METRIKA_ID: ${NEXT_PUBLIC_METRIKA_ID:-}
+    restart: unless-stopped
+    env_file: .env.local
+    environment:
+      LEADS_DIR: /app/data/leads
+      DATABASE_PROVIDER: postgresql
+      DATABASE_URL: postgresql://ceiling:${POSTGRES_PASSWORD}@database:5432/ceiling
+      BOOKING_DEMO: "false"
+    ports:
+      - "127.0.0.1:3000:3000"
+    volumes:
+      - leads:/app/data
+    depends_on:
+      database-init:
+        condition: service_completed_successfully
+    init: true
+volumes:
+  leads:
+  bookings:

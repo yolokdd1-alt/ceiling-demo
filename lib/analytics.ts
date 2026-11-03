@@ -1,0 +1,4 @@
+"use client";
+declare global {interface Window {ym?: ((id:number, method:string,...args:unknown[])=>void)&{a?:unknown[][];l?:number};}}
+export function goal(name:'phone_click'|'form_submit'|'calculation_complete'){if(location.pathname.startsWith('/company'))return;const id=Number(process.env.NEXT_PUBLIC_METRIKA_ID);if(id&&localStorage.getItem('analytics-consent')==='yes')window.ym?.(id,'reachGoal',name);}
+export function initAnalytics(){if(location.pathname.startsWith('/company'))return;const id=Number(process.env.NEXT_PUBLIC_METRIKA_ID);if(!id||document.getElementById('metrika-script'))return;const queue=function(...args:unknown[]){queue.a.push(args)};queue.a=[] as unknown[][];queue.l=Date.now();window.ym=queue;const s=document.createElement('script');s.id='metrika-script';s.async=true;s.src='https://mc.yandex.ru/metrika/tag.js';document.head.appendChild(s);window.ym(id,'init',{clickmap:true,trackLinks:true,accurateTrackBounce:true,webvisor:false});}

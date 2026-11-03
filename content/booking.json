@@ -1,0 +1,25 @@
+{
+  "demo": true,
+  "timezone": "Europe/Moscow",
+  "slotMinutes": 120,
+  "holdMinutes": 10,
+  "advanceDays": 30,
+  "minimumNoticeHours": 3,
+  "weekdays": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "times": [
+    "10:00",
+    "12:00",
+    "14:00",
+    "16:00",
+    "18:00"
+  ],
+  "closedDates": [],
+  "label": "TODO · согласовать расписание и зону выезда компании"
+}

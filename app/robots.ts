@@ -1,0 +1,2 @@
+export const dynamic='force-static';
+import type {MetadataRoute} from 'next';import {site} from '@/lib/content';export default function robots():MetadataRoute.Robots {const base=process.env.SITE_URL||site.siteUrl;return {rules:{userAgent:'*',allow:site.configured?'/':undefined,disallow:site.configured?['/api/','/company/']:'/'},...(site.configured&&base?{sitemap:new URL('/sitemap.xml',base).toString()}:{})};}
